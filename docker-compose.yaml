@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  gpu-api:
+    build:
+      context: ./app
+    image: wisrovi/gpu-api
+    ports:
+      - "9026:8000"
+    # The following section is required to enable GPU access in the container.
+    # It ensures that the container can see and use all available NVIDIA GPUs.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    # You can uncomment and set environment variables here to override the defaults
+    # in app.py. For example, to run on a different port.
+    # environment:
+    #   - GPU_API_HOST=0.0.0.0
+    #   - GPU_API_PORT=9026

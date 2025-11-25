@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gpu-api
+  labels:
+    app: gpu-api
+spec:
+  type: ClusterIP
+  selector:
+    app: gpu-api
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+    name: http
